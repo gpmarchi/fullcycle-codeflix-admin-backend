@@ -1,4 +1,4 @@
-FROM node:14.15.4-slim
+FROM node:18.13.0-slim
 
 RUN usermod -u 1001 node
 USER node
