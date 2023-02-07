@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import { type Replace } from 'helpers/Replace';
 
 export interface ICategoryProps {
@@ -8,6 +9,8 @@ export interface ICategoryProps {
 }
 
 export class Category {
+  private readonly _id: string;
+
   private readonly props: ICategoryProps;
 
   constructor(
@@ -18,12 +21,18 @@ export class Category {
         createdAt?: Date;
       }
     >,
+    id?: string,
   ) {
+    this._id = id ?? randomUUID();
     this.props = {
       ...props,
       isActive: props.isActive ?? true,
       createdAt: props.createdAt ?? new Date(),
     };
+  }
+
+  public get id(): string {
+    return this._id;
   }
 
   public get name(): string {

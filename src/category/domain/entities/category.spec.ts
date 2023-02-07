@@ -1,6 +1,22 @@
+import { randomUUID } from 'crypto';
+
 import { Category } from './category';
 
 describe('Category', () => {
+  it('should be able to create a new category with informed id', () => {
+    const categoryProps = {
+      name: 'Movie',
+    };
+
+    const category = new Category(categoryProps, randomUUID());
+
+    expect(category.id).toBeTruthy();
+    expect(category.name).toBe(categoryProps.name);
+    expect(category.description).toBe(undefined);
+    expect(category.isActive).toBe(true);
+    expect(category.createdAt).toBeInstanceOf(Date);
+  });
+
   it('should be able to create a new category with name only', () => {
     const categoryProps = {
       name: 'Movie',
@@ -8,6 +24,7 @@ describe('Category', () => {
 
     const category = new Category(categoryProps);
 
+    expect(category.id).toBeTruthy();
     expect(category.name).toBe(categoryProps.name);
     expect(category.description).toBe(undefined);
     expect(category.isActive).toBe(true);
