@@ -1,5 +1,6 @@
-import { randomUUID } from 'crypto';
 import { type Replace } from 'helpers/Replace';
+
+import { UniqueEntityId } from '../../../shared/domain/vos/unique-entity-id';
 
 export interface ICategoryProps {
   name: string;
@@ -9,7 +10,7 @@ export interface ICategoryProps {
 }
 
 export class Category {
-  private readonly _id: string;
+  private readonly _id: UniqueEntityId;
 
   private readonly props: ICategoryProps;
 
@@ -21,9 +22,9 @@ export class Category {
         createdAt?: Date;
       }
     >,
-    id?: string,
+    id?: UniqueEntityId,
   ) {
-    this._id = id ?? randomUUID();
+    this._id = id ?? new UniqueEntityId();
     this.props = {
       ...props,
       isActive: props.isActive ?? true,
@@ -31,7 +32,7 @@ export class Category {
     };
   }
 
-  public get id(): string {
+  public get id(): UniqueEntityId {
     return this._id;
   }
 

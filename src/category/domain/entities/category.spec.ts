@@ -1,5 +1,4 @@
-import { randomUUID } from 'crypto';
-
+import { UniqueEntityId } from '../../../shared/domain/vos/unique-entity-id';
 import { Category } from './category';
 
 describe('Category', () => {
@@ -8,7 +7,7 @@ describe('Category', () => {
       name: 'Movie',
     };
 
-    const category = new Category(categoryProps, randomUUID());
+    const category = new Category(categoryProps, new UniqueEntityId());
 
     expect(category.id).toBeTruthy();
     expect(category.name).toBe(categoryProps.name);
